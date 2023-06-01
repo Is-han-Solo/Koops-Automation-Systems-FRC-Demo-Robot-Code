@@ -90,10 +90,8 @@ void Controller::updateBtnData(ControllerData &controllerData)
         controllerData.pRYStick = -getAxis(0, 5);
     }
 
-    controllerData.pLShoulderSwitch = getBtn(0, 2);
-    controllerData.pRShoulderSwitch = getBtn(0, 1);
-    controllerData.pLPalmSwitch = getBtn(0, 4);
-    controllerData.pRPalmSwitch = getBtn(0, 3);
+    controllerData.pLTrigger = getAxis(0, 2);
+    controllerData.pRTrigger = getAxis(0, 3);
 
     //secondary controls:
 

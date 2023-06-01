@@ -40,7 +40,7 @@ void Drivebase::RobotInit(const RobotData &robotData)
 
     dbLF.BurnFlash();
 
-    customOdometry.SetPoseEstimator(odometry);
+    // customOdometry.SetPoseEstimator(odometry);
 
     setPercentOutput(0, 0);
 
@@ -421,12 +421,6 @@ void Drivebase::autonControl(const RobotData &robotData, DrivebaseData &drivebas
                 
                 case 0:
                     setVelocity(1.25, 1.25);
-                    
-                    // if (robotData.gyroData.velocity < 0.25 && std::abs(robotData.gyroData.angularMomentum) < 5) 
-                    // {
-                    //     chargeStationBackoffBeginTime = robotData.timerData.secSinceEnabled;
-                    //     ChargeStationTraverseStep = -1; 
-                    // }
                     if (robotData.gyroData.angularMomentum < -30) ChargeStationTraverseStep++;
 
                     break;
@@ -520,9 +514,6 @@ void Drivebase::updateOdometry(const RobotData &robotData, DrivebaseData &driveb
             odometry.AddVisionMeasurement(robotData.limelightData.Odometry, frc::Timer::GetFPGATimestamp() - units::time::second_t{robotData.limelightData.latency});   
         }
     }
-
-
-
     
     odometry.UpdateWithTime(frc::Timer::GetFPGATimestamp(), currentRotation, leftDistance, rightDistance);
 
@@ -727,9 +718,7 @@ void Drivebase::getNextAutonStep(const RobotData &robotData, DrivebaseData &driv
             
             if (!odometryInitialized) 
             {
-                // automatically reset odometry to start pose of the first path
                 units::second_t zeroSec{0};
-
 
                 frc::Trajectory::State trajectoryState = trajectory.Sample(zeroSec);
                 frc::Pose2d firstPose = trajectoryState.pose;
@@ -738,19 +727,12 @@ void Drivebase::getNextAutonStep(const RobotData &robotData, DrivebaseData &driv
                 double firstY = firstPose.Y().to<double>();
                 
                 double firstRadians = firstPose.Rotation().Radians().to<double>();
-                // frc::SmartDashboard::PutNumber("firstRadians", firstRadians);
 
                 resetOdometry(firstX, firstY, firstRadians, robotData);
-                // zeroEncoders();
-                // frc::smartDashboard::PutNumber("autonStep OdoInit", autonData.autonStep);
 
                 odometryInitialized = true;
             }
-
-            // frc::smartDashboard::PutBoolean("odometryInitialized", odometryInitialized);
         }
-
-        // frc::SmartDashboard::PutNumber("autonStep", autonData.autonStep);
     }
     else 
     {
@@ -760,8 +742,6 @@ void Drivebase::getNextAutonStep(const RobotData &robotData, DrivebaseData &driv
 
 void Drivebase::turnInPlaceAuton(double degrees, const RobotData &robotData, DrivebaseData &drivebaseData, AutonData &autonData) 
 {
-
-    // frc::SmartDashboard::PutNumber("degree diff", degrees);
     
     lastDegrees.push_back(degrees);
     if (lastDegrees.size() > 2) 

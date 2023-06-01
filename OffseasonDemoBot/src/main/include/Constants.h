@@ -7,30 +7,13 @@ static const int
     rightLeadDeviceID = 4,
     rightFollowDeviceID = 5;
 
-//end effector:
+// pivot
 static const int
-    endEffectorRollerID = 33; // NOT REAL VALUE.
+    pivotMotorID = 11; 
 
-//arm:
+// arm
 static const int
-    bullBarRollerID = 11, // 
-    bullBarSliderID = 12, // 
-    armWristID = 32, // Not actual value.
-    armPivotID = 31;
+    armMotorID = 21;
 
-// elevator
-static const int
-    elevatorID = 21;
-
-
-//limelight:
 static const double
     pi = 3.141592653589793238463;
-
-// PWM
-static const int
-    bullBarRollerPWMID = 0;
-
-
-
-

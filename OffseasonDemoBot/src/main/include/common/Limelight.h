@@ -79,7 +79,6 @@ private:
     double distanceFromCenterOfRobot = 0;
     double angleFromCenterOfRobot = 0;
 
-    double secondAngleFromCenter = 0;;
     double finalAngle;
 
     units::radian_t gyroRadians{0};

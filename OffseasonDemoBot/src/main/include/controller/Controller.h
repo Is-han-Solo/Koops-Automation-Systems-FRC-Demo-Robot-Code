@@ -10,9 +10,8 @@ struct RobotData;
 enum Mode 
 {
     MODE_TELEOP_SA,
-    MODE_TELEOP_MANUAL,
-    MODE_TELEOP_DISABLE_BEAMS
-    
+    MODE_ARM_DOWN,
+    MODE_ARM_UP
 };
 
 enum ElevatorSetPosition
@@ -41,6 +40,15 @@ struct ControlData
 
     bool saResetOdometry;
 
+    bool intake;
+    bool eject;
+
+    bool pivotHighPosition;
+    bool pivotMidPosition;
+    bool pivotLowPosition;
+    bool pivotEdgeCommunityPosition;
+    bool pivotHomePosition;
+
     
 };
 
@@ -56,10 +64,8 @@ struct ControllerData
     double pRXStick = 0;
     double pRYStick = 0;
 
-    bool pLShoulderSwitch = false;
-    bool pRShoulderSwitch = false;
-    bool pLPalmSwitch = false;
-    bool pRPalmSwitch = false;
+    bool pLTrigger;
+    bool pRTrigger;
 
     // secondary:
 

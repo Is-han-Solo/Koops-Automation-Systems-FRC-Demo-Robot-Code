@@ -3,7 +3,7 @@
 #include "Constants.h"
 #include "auton/Auton.h"
 #include "common/Gyro.h"
-#include "common/CustomDifferentialDriveOdometry.h"
+// #include "common/CustomDifferentialDriveOdometry.h"
 
 #include <frc/TimedRobot.h>
 #include <frc/Joystick.h>
@@ -150,7 +150,7 @@ private:
     frc::Trajectory trajectory{};
     frc::RamseteController ramseteController{};
 
-    CustomDifferentialDriveOdometry customOdometry;
+    // CustomDifferentialDriveOdometry customOdometry;
 
     frc::Field2d field;
 
