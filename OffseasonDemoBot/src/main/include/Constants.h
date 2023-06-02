@@ -11,6 +11,10 @@ static const int
 static const int
     pivotMotorID = 11; 
 
+static const int
+    endEffectorTopRollerID = 31,
+    endEffectorBottomRollerID = 32;
+
 // arm
 static const int
     armMotorID = 21;

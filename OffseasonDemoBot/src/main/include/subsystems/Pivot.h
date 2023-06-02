@@ -18,6 +18,10 @@ struct PivotData
     double lowPosition = 12;
     double homePosition = 10;
     double edgeCommunityPosition = 21;
+    double intakePosition = 30;
+
+    bool isThereCube = false;
+    bool pastCubeRead = false;
 };
 
 enum PivotRunMode
@@ -52,6 +56,7 @@ private:
     rev::SparkMaxRelativeEncoder pivotRelativeEncoder = pivotMotor.GetEncoder();
     rev::SparkMaxPIDController pivotPIDController = pivotMotor.GetPIDController();
     rev::SparkMaxAbsoluteEncoder pivotAbsoluteEncoder = pivotMotor.GetAbsoluteEncoder(rev::SparkMaxAbsoluteEncoder::Type::kDutyCycle);
+    rev::SparkMaxLimitSwitch cubeLimitSwitch = pivotMotor.GetReverseLimitSwitch(rev::CANDigitalInput::LimitSwitchPolarity::kNormallyClosed);
 
     double pivotMinPosition = 10;
     double pivotMaxPosition = pivotMinPosition + 40; // needs to change

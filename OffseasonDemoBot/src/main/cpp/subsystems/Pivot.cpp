@@ -48,6 +48,9 @@ void Pivot::RobotPeriodic(const RobotData &robotData, PivotData &pivotData, Cont
 
     frc::SmartDashboard::PutNumber("Pivot RELATIVE Position", pivotRelativeEncoder.GetPosition());
     frc::SmartDashboard::PutNumber("Pivot ABSOLUTE Position", pivotAbsoluteEncoder.GetPosition());
+
+    pivotData.pastCubeRead = pivotData.isThereCube;
+    pivotData.isThereCube = cubeLimitSwitch.Get();
 }
 
 void Pivot::SemiAuto(const RobotData &robotData, PivotData &pivotData, ControlData &controlData)
@@ -71,6 +74,13 @@ void Pivot::SemiAuto(const RobotData &robotData, PivotData &pivotData, ControlDa
 
     if ((pivotRunMode == ABSOLUTE && robotData.pivotData.absoluteEncoderInitialized) || (pivotRunMode == RELATIVE))
     {
+
+        if (robotData.controlData.intake)
+        {
+            controlData.mode = MODE_ARM_UP;
+            SetAngle(robotData.pivotData.intakePosition);
+        }
+
         if (robotData.controlData.pivotHighPosition)
         {
             controlData.mode = MODE_ARM_UP;
@@ -97,6 +107,12 @@ void Pivot::SemiAuto(const RobotData &robotData, PivotData &pivotData, ControlDa
             SetAngle(robotData.pivotData.homePosition);
         }
 
+        if (((!robotData.pivotData.isThereCube) && (robotData.pivotData.pastCubeRead)) ||
+            ((robotData.pivotData.isThereCube) && (!robotData.pivotData.pastCubeRead)))
+        {
+            controlData.mode = MODE_ARM_UP;
+            SetAngle(robotData.pivotData.homePosition);
+        }
 
     }
 
