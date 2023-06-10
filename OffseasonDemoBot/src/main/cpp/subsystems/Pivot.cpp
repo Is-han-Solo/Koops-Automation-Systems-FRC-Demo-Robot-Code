@@ -29,8 +29,6 @@ void Pivot::RobotPeriodic(const RobotData &robotData, PivotData &pivotData, Cont
 {
     switch (robotData.controlData.mode) 
     {
-        case MODE_ARM_DOWN:
-        case MODE_ARM_UP:
         case MODE_TELEOP_SA:
             SemiAuto(robotData, pivotData, controlData);
             break;
@@ -77,45 +75,36 @@ void Pivot::SemiAuto(const RobotData &robotData, PivotData &pivotData, ControlDa
 
         if (robotData.controlData.intake)
         {
-            controlData.mode = MODE_ARM_UP;
             SetAngle(robotData.pivotData.intakePosition);
         }
 
         if (robotData.controlData.pivotHighPosition)
         {
-            controlData.mode = MODE_ARM_UP;
             SetAngle(robotData.pivotData.highPosition);
         }
         else if (robotData.controlData.pivotMidPosition)
         {
-            controlData.mode = MODE_ARM_UP;
             SetAngle(robotData.pivotData.midPosition);
         }
         else if (robotData.controlData.pivotLowPosition)
         {
-            controlData.mode = MODE_ARM_UP;
             SetAngle(robotData.pivotData.lowPosition);
         }
         else if (robotData.controlData.pivotEdgeCommunityPosition)
         {
-            controlData.mode = MODE_ARM_DOWN;
             SetAngle(robotData.pivotData.edgeCommunityPosition);
         }
         else if (robotData.controlData.pivotHomePosition)
         {
-            controlData.mode = MODE_ARM_UP;
             SetAngle(robotData.pivotData.homePosition);
         }
 
         if (((!robotData.pivotData.isThereCube) && (robotData.pivotData.pastCubeRead)) ||
             ((robotData.pivotData.isThereCube) && (!robotData.pivotData.pastCubeRead)))
         {
-            controlData.mode = MODE_ARM_UP;
             SetAngle(robotData.pivotData.homePosition);
         }
-
     }
-
 }
 
 void Pivot::SetAngle(double position)

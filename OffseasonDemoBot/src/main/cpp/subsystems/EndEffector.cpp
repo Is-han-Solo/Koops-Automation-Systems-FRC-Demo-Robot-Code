@@ -25,8 +25,6 @@ void EndEffector::RobotPeriodic(const RobotData &robotData, EndEffectorData &end
 {
     switch (robotData.controlData.mode) 
     {
-        case MODE_ARM_DOWN:
-        case MODE_ARM_UP:
         case MODE_TELEOP_SA:
             SemiAuto(robotData, endEffectorData);
             break;

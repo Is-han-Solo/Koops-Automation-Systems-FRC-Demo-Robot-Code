@@ -12,13 +12,13 @@ void Controller::updateControlData(const RobotData &robotData, const ControllerD
         case -1:
             break;
         case 0: // up
-            controlData.mode = MODE_ARM_UP;
+            
             break;
         case 90:    // right
             controlData.mode = MODE_TELEOP_SA;
             break;
         case 180:   // down
-            controlData.mode = MODE_ARM_DOWN;
+            
             break;
         case 270:   // left
             
@@ -52,6 +52,31 @@ void Controller::updateControlData(const RobotData &robotData, const ControllerD
     controlData.pivotMidPosition = controllerData.sBBtn;
     controlData.pivotHighPosition = controllerData.sYBtn;
     controlData.pivotHomePosition = controllerData.sRBumper;
+
+    if ((robotData.pivotData.pastCubeRead) && (!robotData.pivotData.isThereCube))
+    {
+        controlData.armUp = true;
+    }
+    else
+    {
+        if (controllerData.sDPad == 0)
+        {
+            controlData.armUp = true;
+        }
+        else
+        {
+            controlData.armUp = false;
+        }
+
+        if (controllerData.sDPad == 180)
+        {
+            controlData.armDown = true;
+        }
+        else
+        {
+            controlData.armDown = false;
+        }
+    }
 
 }
 

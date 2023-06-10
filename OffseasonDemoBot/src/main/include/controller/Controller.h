@@ -9,9 +9,7 @@ struct RobotData;
 
 enum Mode 
 {
-    MODE_TELEOP_SA,
-    MODE_ARM_DOWN,
-    MODE_ARM_UP
+    MODE_TELEOP_SA
 };
 
 enum ElevatorSetPosition
@@ -48,6 +46,9 @@ struct ControlData
     bool pivotLowPosition;
     bool pivotEdgeCommunityPosition;
     bool pivotHomePosition;
+
+    bool armDown;
+    bool armUp;
 
     
 };
